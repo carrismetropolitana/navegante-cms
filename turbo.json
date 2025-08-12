@@ -1,0 +1,24 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"envMode": "loose",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**", ".next/**"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"lint": {
+			"dependsOn": ["^lint"]
+		},
+		"lint-fix": {
+			"dependsOn": ["^lint-fix"]
+		},
+		"test": {
+			"dependsOn": ["^test"]
+		}
+	},
+	"ui": "tui"
+}

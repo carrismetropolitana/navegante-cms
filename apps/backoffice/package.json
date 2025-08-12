@@ -1,0 +1,46 @@
+{
+	"name": "@carrismetropolitana/navegante-cms-backoffice",
+	"version": "1.0.0",
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"build": "npm run generate:types && npm run generate:importmap && next build",
+		"dev": "npm run generate:types && npm run generate:importmap && next dev -p 49001",
+		"generate:importmap": "PAYLOAD_CONFIG_PATH=src/payload-config.ts npx payload generate:importmap",
+		"generate:types": "PAYLOAD_CONFIG_PATH=src/payload-config.ts npx payload generate:types",
+		"lint": "eslint .",
+		"lint-fix": "eslint . --fix",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@carrismetropolitana/navegante-cms-shared-settings": "*",
+		"@payloadcms/db-mongodb": "3.50.0",
+		"@payloadcms/email-nodemailer": "3.50.0",
+		"@payloadcms/next": "3.50.0",
+		"@payloadcms/richtext-lexical": "3.50.0",
+		"@payloadcms/storage-s3": "3.50.0",
+		"@payloadcms/ui": "3.50.0",
+		"@tmlmobilidade/utils": "20250811.2224.4",
+		"graphql": "16.11.0",
+		"next": "15.4.6",
+		"nodemailer": "7.0.5",
+		"payload": "3.50.0",
+		"react": "19.1.1",
+		"react-dom": "19.1.1",
+		"sharp": "0.34.3"
+	},
+	"devDependencies": {
+		"@carrismetropolitana/eslint": "20250622.1204.50",
+		"@carrismetropolitana/navegante-cms-shared-types": "*",
+		"@tmlmobilidade/tsconfig": "20250811.2224.4",
+		"@types/node": "24.2.1",
+		"@types/react": "19.1.10",
+		"@types/react-dom": "19.1.7",
+		"typescript": "5.9.2"
+	},
+	"overrides": {
+		"react": "19.1.1",
+		"react-dom": "19.1.1"
+	},
+	"packageManager": "npm@11.5.2"
+}

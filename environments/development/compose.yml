@@ -1,0 +1,26 @@
+# # #
+
+name: cmet-website-development
+
+volumes:
+  websitedbdata:
+
+services:
+  #
+
+  # # # # # # # # # # # # # # # # # # # # #
+  # # # # # # # # # # # # # # # # # # # # #
+
+  websitedb:
+    image: mongo
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: '1m'
+        max-file: '1'
+    ports:
+      - 49101:27017
+    volumes:
+      - websitedbdata:/data/db
+    env_file:
+      - ./secrets/.env
