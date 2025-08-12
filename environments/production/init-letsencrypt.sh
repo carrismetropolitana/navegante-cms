@@ -7,7 +7,7 @@
 email="carrismetropolitana@gmail.com"
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
-primary_domain=carrismetropolitana.pt
+primary_domain=navegante-cms.carrismetropolitana.pt
 
 
 # # #
@@ -35,15 +35,15 @@ echo
 # # #
 # WEBSITE FRONTEND (ALPHA)
 
-echo ">>> Preparing for "$primary_domain" and "$website_frontend_2" ..."
+echo ">>> Preparing for "$primary_domain" ..."
 
 echo ">>> Deleting dummy certificate..."
 docker compose run --rm --entrypoint "rm -Rf /etc/letsencrypt/live/$primary_domain && rm -Rf /etc/letsencrypt/archive/$primary_domain && rm -Rf /etc/letsencrypt/renewal/$primary_domain.conf" certbot
 echo
 
-echo ">>> Requesting Let's Encrypt certificate for "$primary_domain" (+ "www.$primary_domain") ..."
+echo ">>> Requesting Let's Encrypt certificate for "$primary_domain" ..."
 if [ $staging != "0" ]; then staging_arg="--staging"; fi # Enable staging mode if needed
-docker compose run --rm --entrypoint "certbot certonly --webroot -w /var/www/certbot $staging_arg -d $primary_domain -d www.$primary_domain --email $email --rsa-key-size 4096 --agree-tos --noninteractive --verbose --force-renewal" certbot
+docker compose run --rm --entrypoint "certbot certonly --webroot -w /var/www/certbot $staging_arg -d $primary_domain --email $email --rsa-key-size 4096 --agree-tos --noninteractive --verbose --force-renewal" certbot
 echo
 
 

@@ -1,9 +1,9 @@
 # # #
 
-name: cmet-navegante-cms-production
+name: navegante-cms-production
 
 volumes:
-  navegante-cmsdbdata:
+  cmsdbdata:
   certbotdata:
 
 services:
@@ -27,7 +27,7 @@ services:
   # # # # # # # # # # # # # # # # # # # # #
   # # # # # # # # # # # # # # # # # # # # #
 
-  navegante-cmsdb:
+  cmsdb:
     image: mongo
     restart: unless-stopped
     logging:
@@ -35,7 +35,7 @@ services:
         max-size: '1m'
         max-file: '1'
     volumes:
-      - navegante-cmsdbdata:/data/db
+      - cmsdbdata:/data/db
     env_file:
       - ./secrets/.env
 
