@@ -10,16 +10,14 @@ import sharp from 'sharp';
 
 /* * */
 
-import { CaseStudies } from '@/schemas/CaseStudies/collection';
+import { CatalogProducts } from '@/schemas/CatalogProducts/collection';
 import { Media } from '@/schemas/Media/collection';
-import { News } from '@/schemas/News/collection';
-import { Topics } from '@/schemas/Topics/collection';
 import { Users } from '@/schemas/Users/collection';
 
 /* * */
 
 import { GeneralStatus } from '@/schemas/GeneralStatus/global';
-import { HomeSlider } from '@/schemas/HomeSlider/global';
+import { VirtualCardTutorial } from '@/schemas/VirtualCardTutorial/global';
 
 /* * */
 
@@ -28,14 +26,12 @@ export default buildConfig({
 	admin: { user: 'users' },
 
 	collections: [
-		CaseStudies,
 		Media,
-		News,
-		Topics,
+		CatalogProducts,
 		Users,
 	],
 
-	db: mongooseAdapter({ url: process.env.navegante-cmsDB_URI || 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
+	db: mongooseAdapter({ url: process.env.CMSDB_URI || 'mongodb://placeholder:placeholder@placeholder:12345/placeholder' }),
 
 	editor: lexicalEditor(),
 
@@ -55,7 +51,7 @@ export default buildConfig({
 
 	globals: [
 		GeneralStatus,
-		HomeSlider,
+		VirtualCardTutorial,
 	],
 
 	plugins: [

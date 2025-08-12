@@ -1,9 +1,9 @@
 # # #
 
-name: cmet-website-development
+name: navegante-cms-development
 
 volumes:
-  websitedbdata:
+  cmsdbdata:
 
 services:
   #
@@ -19,8 +19,8 @@ services:
         max-size: '1m'
         max-file: '1'
     ports:
-      - 49101:27017
+      - 39101:27017
     volumes:
-      - websitedbdata:/data/db
+      - cmsdbdata:/data/db
     env_file:
       - ./secrets/.env

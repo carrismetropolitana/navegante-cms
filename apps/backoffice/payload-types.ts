@@ -67,10 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    'case-studies': CaseStudy;
     media: Media;
-    news: News;
-    topics: Topic;
+    'catalog-products': CatalogProduct;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,10 +76,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    news: NewsSelect<false> | NewsSelect<true>;
-    topics: TopicsSelect<false> | TopicsSelect<true>;
+    'catalog-products': CatalogProductsSelect<false> | CatalogProductsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -92,11 +88,11 @@ export interface Config {
   };
   globals: {
     'general-status': GeneralStatus;
-    'home-slider': HomeSlider;
+    'virtual-card-tutorial': VirtualCardTutorial;
   };
   globalsSelect: {
     'general-status': GeneralStatusSelect<false> | GeneralStatusSelect<true>;
-    'home-slider': HomeSliderSelect<false> | HomeSliderSelect<true>;
+    'virtual-card-tutorial': VirtualCardTutorialSelect<false> | VirtualCardTutorialSelect<true>;
   };
   locale: null;
   user: User & {
@@ -127,18 +123,6 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies".
- */
-export interface CaseStudy {
-  id: string;
-  title: string;
-  amount: number;
-  is_enabled: boolean;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -158,41 +142,21 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news".
+ * via the `definition` "catalog-products".
  */
-export interface News {
+export interface CatalogProduct {
   id: string;
+  product_id: string;
   title: string;
-  summary: string;
-  body: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  is_featured?: boolean | null;
-  topics?: (string | Topic)[] | null;
-  featured_image?: (string | null) | Media;
-  publishedAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics".
- */
-export interface Topic {
-  id: string;
-  title: string;
-  description?: string | null;
+  cards?:
+    | {
+        is_enabled?: boolean | null;
+        title: string;
+        description: string;
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -229,20 +193,12 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'case-studies';
-        value: string | CaseStudy;
-      } | null)
-    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'news';
-        value: string | News;
-      } | null)
-    | ({
-        relationTo: 'topics';
-        value: string | Topic;
+        relationTo: 'catalog-products';
+        value: string | CatalogProduct;
       } | null)
     | ({
         relationTo: 'users';
@@ -292,17 +248,6 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies_select".
- */
-export interface CaseStudiesSelect<T extends boolean = true> {
-  title?: T;
-  amount?: T;
-  is_enabled?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -321,25 +266,20 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news_select".
+ * via the `definition` "catalog-products_select".
  */
-export interface NewsSelect<T extends boolean = true> {
+export interface CatalogProductsSelect<T extends boolean = true> {
+  product_id?: T;
   title?: T;
-  summary?: T;
-  body?: T;
-  is_featured?: T;
-  topics?: T;
-  featured_image?: T;
-  publishedAt?: T;
-  updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics_select".
- */
-export interface TopicsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
+  cards?:
+    | T
+    | {
+        is_enabled?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -420,18 +360,18 @@ export interface GeneralStatus {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-slider".
+ * via the `definition` "virtual-card-tutorial".
  */
-export interface HomeSlider {
+export interface VirtualCardTutorial {
   id: string;
-  slides?:
+  steps?:
     | {
         is_enabled?: boolean | null;
-        image?: (string | null) | Media;
-        title?: string | null;
-        more_info_url?: string | null;
-        start_date?: string | null;
-        end_date?: string | null;
+        title: string;
+        description: string;
+        video: string | Media;
+        correct_answer: string;
+        wrong_answer: string;
         id?: string | null;
       }[]
     | null;
@@ -460,18 +400,18 @@ export interface GeneralStatusSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home-slider_select".
+ * via the `definition` "virtual-card-tutorial_select".
  */
-export interface HomeSliderSelect<T extends boolean = true> {
-  slides?:
+export interface VirtualCardTutorialSelect<T extends boolean = true> {
+  steps?:
     | T
     | {
         is_enabled?: T;
-        image?: T;
         title?: T;
-        more_info_url?: T;
-        start_date?: T;
-        end_date?: T;
+        description?: T;
+        video?: T;
+        correct_answer?: T;
+        wrong_answer?: T;
         id?: T;
       };
   updatedAt?: T;

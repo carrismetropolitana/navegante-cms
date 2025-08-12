@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "npm run generate:types && npm run generate:importmap && next build",
-		"dev": "npm run generate:types && npm run generate:importmap && next dev -p 49001",
+		"dev": "npm run generate:types && npm run generate:importmap && next dev -p 39001",
 		"generate:importmap": "PAYLOAD_CONFIG_PATH=src/payload-config.ts npx payload generate:importmap",
 		"generate:types": "PAYLOAD_CONFIG_PATH=src/payload-config.ts npx payload generate:types",
 		"lint": "eslint .",

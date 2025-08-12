@@ -6,7 +6,7 @@ import { useRowLabel } from '@payloadcms/ui';
 
 /* * */
 
-export const HomeSliderMessageLabel = () => {
+export const VirtualCardTutorialStepLabel = () => {
 	//
 
 	const { data } = useRowLabel<{ is_enabled: boolean, title: string }>();
