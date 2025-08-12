@@ -148,7 +148,8 @@ export interface CatalogProduct {
   id: string;
   product_id: string;
   title: string;
-  cards?:
+  cover_image?: (string | null) | Media;
+  info_cards?:
     | {
         is_enabled?: boolean | null;
         title: string;
@@ -271,7 +272,8 @@ export interface MediaSelect<T extends boolean = true> {
 export interface CatalogProductsSelect<T extends boolean = true> {
   product_id?: T;
   title?: T;
-  cards?:
+  cover_image?: T;
+  info_cards?:
     | T
     | {
         is_enabled?: T;
